@@ -1,6 +1,9 @@
+import sys
 import pandas as pd
+from sqlalchemy import text
+import json
+from sqlalchemy import create_engine
 import numpy as np
-import sqlite3
 
 engine = create_engine('postgresql+psycopg2://airflow:airflow@192.168.137.112:2345/postgres')
 
@@ -42,7 +45,7 @@ def create_table():
         with engine.connect() as conn:
             for name in [TRAFFIC_SCHEMA,AUTOMOBILE_SCHEMA]:
                 
-                with open(f'/opt/pgsql/{name}', "r") as file:
+                with open(f'/opt/db_sql/{name}', "r") as file:
                     query = text(file.read())
                     conn.execute(query)
         print("Successfull")
@@ -58,8 +61,7 @@ def insert_to_table(json_stream :str, table_name: str,from_file=False ):
         if not from_file:
             df = pd.read_json(json_stream)
         else:
-            # df = pd.read_json(f'../temp/{json_stream}')
-            with open(f'../temp_storage/{json_stream}','r') as file:
+            with open(f'../temp/{json_stream}','r') as file:
                 data=file.readlines()
             dt=data[0]
 
