@@ -9,9 +9,9 @@ CREATE TABLE IF NOT EXISTS automobiles
     "lat_acc" TEXT DEFAULT NULL,
     "time" TEXT DEFAULT NULL,
     PRIMARY KEY ("id"),
-    CONSTRAINT fk_trajectory
+    CONSTRAINT fk_traffic
         FOREIGN KEY("track_id") 
-            REFERENCES trajectories(track_id)
+            REFERENCES traffic(track_id)
             ON DELETE CASCADE
     
 );

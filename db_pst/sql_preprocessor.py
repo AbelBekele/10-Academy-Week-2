@@ -1,9 +1,8 @@
 import pandas as pd
 import numpy as np
 import sqlite3
-import DatabaseConnection from connection
 
-DatabaseConnection.connect()
+engine = create_engine('postgresql+psycopg2://airflow:airflow@192.168.137.112:2345/postgres')
 
 AUTOMOBILE_SCHEMA = "automobile_data_schema.sql"
 TRAFFIC_SCHEMA = "traffic_schema.sql"
@@ -41,7 +40,7 @@ class DBFilter:
 def create_table():
     try:
         with engine.connect() as conn:
-            for name in [TRAJECTORIES_SCHEMA,VEHICLE_SCHEMA]:
+            for name in [TRAFFIC_SCHEMA,AUTOMOBILE_SCHEMA]:
                 
                 with open(f'/opt/pgsql/{name}', "r") as file:
                     query = text(file.read())

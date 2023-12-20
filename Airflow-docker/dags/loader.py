@@ -7,7 +7,7 @@ from airflow.operators.python import PythonOperator
 
 cwd=os.getcwd()
 sys.path.append(f'../utils/')
-sys.path.append(f'../db/')
+sys.path.append(f'../db_pst/')
 sys.path.append(f'../temp/')
 sys.path.insert(0,os.path.abspath(os.path.dirname(__file__)))
 
@@ -16,8 +16,6 @@ import sql_preprocessor
 
 data_extractor=DataExtractor()
 
-# def separate_data(ti):
-#     data_extractor.separate(file_name='20181024_d1_0830_0900.csv',number=5)
 
 def extract_data(ti):
 
@@ -28,21 +26,21 @@ def extract_data(ti):
     ti.xcom_push(key="automobile",value=automobile_file_name)
 
 def create_table():
-    db_util.create_table()
+    sql_preprocessor.create_table()
 
 def populate__automobiles_table(ti):
     traffic_file_name = ti.xcom_pull(key="traffic",task_ids='extract_from_file')
     # automobile_file_name = ti.xcom_pull(key="automobile",task_ids='extract_from_file')
     # traffic_data,automobile_data=combined_df['traffic'], combined_df['automobile']
-    db_util.insert_to_table(traffic_file_name, 'trajectories',from_file=True)
-    # db_util.insert_to_table(automobile_file_name, 'automobiles',from_file=True)
+    sql_preprocessor.insert_to_table(traffic_file_name, 'trajectories',from_file=True)
+    # sql_preprocessor.insert_to_table(automobile_file_name, 'automobiles',from_file=True)
 
 def populate_traffic_table(ti):
     # traffic_file_name = ti.xcom_pull(key="traffic",task_ids='extract_from_file')
     automobile_file_name = ti.xcom_pull(key="automobile",task_ids='extract_from_file')
     # traffic_data,automobile_data=combined_df['traffic'], combined_df['automobile']
-    # db_util.insert_to_table(traffic_file_name, 'trajectories',from_file=True)
-    db_util.insert_to_table(automobile_file_name, 'automobiles',from_file=True)
+    # sql_preprocessor.insert_to_table(traffic_file_name, 'trajectories',from_file=True)
+    sql_preprocessor.insert_to_table(automobile_file_name, 'automobiles',from_file=True)
 
 def clear_memory_automobile(ti):
     traffic_file_name = ti.xcom_pull(key="traffic",task_ids='extract_from_file')
