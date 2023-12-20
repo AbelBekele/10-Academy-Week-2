@@ -5,5 +5,4 @@ pick
 seaborn
 jupyter
 sqlalchemy
-psycopg2
 python-dotenv
