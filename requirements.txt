@@ -1,0 +1,9 @@
+matplotlib
+nltk
+pandas
+pick
+seaborn
+jupyter
+sqlalchemy
+psycopg2
+python-dotenv
