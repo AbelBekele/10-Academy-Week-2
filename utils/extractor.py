@@ -100,8 +100,8 @@ class DataExtractor():
             tr_file_name= str(datetime.today()).replace(' ','_')+"trajectory.json"
             vh_file_name= str(datetime.today()).replace(' ','_')+"vehicle_data.json"
 
-            tr.to_json(f'../temp_storage/{tr_file_name}',orient='records')
-            vh.to_json(f'../temp_storage/{vh_file_name}',orient='records')
+            tr.to_json(f'../temp/{tr_file_name}',orient='records')
+            vh.to_json(f'../temp/{vh_file_name}',orient='records')
 
             return tr_file_name,vh_file_name
         except Exception as e:
