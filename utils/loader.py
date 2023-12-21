@@ -30,47 +30,37 @@ def create_table():
 
 def populate__automobiles_table(ti):
     traffic_file_name = ti.xcom_pull(key="traffic",task_ids='extract_from_file')
-    # automobile_file_name = ti.xcom_pull(key="automobile",task_ids='extract_from_file')
-    # traffic_data,automobile_data=combined_df['traffic'], combined_df['automobile']
-    sql_preprocessor.insert_to_table(traffic_file_name, 'trajectories',from_file=True)
-    # sql_preprocessor.insert_to_table(automobile_file_name, 'automobiles',from_file=True)
+    sql_preprocessor.insert_to_table(traffic_file_name, 'traffic',from_file=True)
 
 def populate_traffic_table(ti):
-    # traffic_file_name = ti.xcom_pull(key="traffic",task_ids='extract_from_file')
     automobile_file_name = ti.xcom_pull(key="automobile",task_ids='extract_from_file')
-    # traffic_data,automobile_data=combined_df['traffic'], combined_df['automobile']
-    # sql_preprocessor.insert_to_table(traffic_file_name, 'trajectories',from_file=True)
     sql_preprocessor.insert_to_table(automobile_file_name, 'automobiles',from_file=True)
 
 def clear_memory_automobile(ti):
     traffic_file_name = ti.xcom_pull(key="traffic",task_ids='extract_from_file')
-    # automobile_file_name = ti.xcom_pull(key="automobile",task_ids='extract_from_file')
 
-    os.remove(f'../temp_storage/{traffic_file_name}')
-    # os.remove(f'../temp_storage/{automobile_file_name}')
+    os.remove(f'../temp/{traffic_file_name}')
 
 def clear_memory_traffic(ti):
-    # traffic_file_name = ti.xcom_pull(key="traffic",task_ids='extract_from_file')
     automobile_file_name = ti.xcom_pull(key="automobile",task_ids='extract_from_file')
 
-    # os.remove(f'../temp_storage/{traffic_file_name}')
-    os.remove(f'../temp_storage/{automobile_file_name}')
+    os.remove(f'../temp/{automobile_file_name}')
 
 # Specifing the default_args
 default_args = {
-    'owner': 'Natnael',
+    'owner': 'Abel',
     'depends_on_past': False,
-    'email': ['natnaelmasresha@gmail.com'],
+    'email': ['abel@abelbekele.com'],
     'email_on_failure': False,
     'email_on_retry': False,
     'retries': 0
 }
 
 with DAG(
-    dag_id='extractor_loader_pg',
+    dag_id='loading_pg',
     default_args=default_args,
     description='this loads our data to the database',
-    start_date=datetime(2022,9,20,3),
+    start_date=datetime(2023,12,21,3),
     schedule_interval='@daily',
     catchup=False
 ) as dag:

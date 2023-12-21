@@ -45,7 +45,7 @@ def create_table():
         with engine.connect() as conn:
             for name in [TRAFFIC_SCHEMA,AUTOMOBILE_SCHEMA]:
                 
-                with open(f'/opt/db_sql/{name}', "r") as file:
+                with open(f'/opt/db_pst/{name}', "r") as file:
                     query = text(file.read())
                     conn.execute(query)
         print("Successfull")
