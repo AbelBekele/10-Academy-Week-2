@@ -6,8 +6,8 @@ with summary as (
     type as "Automobile type",
     count(type) as "Automobile count",
     Round(AVG(Cast(traveled_d as numeric)),2) as "Avg distance traveled",
-    Round(AVG(cast(avg_speed as numeric)),2) as "Avg speed by vehicle"
-    from trajectories 
+    Round(AVG(cast(avg_speed as numeric)),2) as "Avg speed by automobile"
+    from traffic 
     GROUP BY type ORDER BY "Automobile count" ASC
   
 )
