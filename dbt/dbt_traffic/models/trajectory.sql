@@ -10,4 +10,6 @@ with trajectory_data as (
     from automobiles
 )
 
-select * from trajectory_data
+select distinct on (lat, lon) *
+from trajectory_data
+order by lat, lon, time desc
