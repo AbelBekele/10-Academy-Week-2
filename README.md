@@ -1,33 +1,34 @@
-# Data Engineering: Data warehouse tech stack with MySQL/PostgreSQL, DBT, Airflow
+# Traffic Data Analytics Data Warehouse
 
 ## Overview
 
-In response to the city traffic department's imperative for enhanced traffic data analytics, our collaborative efforts have resulted in the successful establishment of a scalable data warehouse tailored for the deployment of swarm UAVs and static roadside cameras. 
+This collaborative project addresses the imperative need for enhanced traffic data analytics within the city traffic department. The successful establishment of a scalable data warehouse, tailored for the deployment of swarm UAVs and static roadside cameras, marks a significant stride in improving traffic flow. Operating within the Extract Load Transform (ELT) framework, powered by the Data Build Tool (DBT), our data warehouse serves as a robust repository for efficiently managing and querying vehicle trajectory data from diverse city locations.
 
-Operating within the Extract Load Transform (ELT) framework, powered by the Data Build Tool (DBT), the data warehouse serves as a robust repository for efficiently managing and querying vehicle trajectory data from diverse city locations. This strategic initiative not only addresses the immediate goal of improving traffic flow but also lays the foundation for undisclosed projects, offering adaptability through on-demand transformation workflows for analytic engineers within the city traffic department. The project underscores our commitment to advancing data-driven solutions and fortifying the city's traffic management capabilities.
+This initiative not only achieves the immediate goal of traffic management but also lays the foundation for undisclosed projects. The adaptability through on-demand transformation workflows for analytic engineers underscores our commitment to advancing data-driven solutions.
 
 ## Table of Contents
-- [Project Title](#data-engineering-data-warehouse-tech-stack-with-mysqlpostgresql-dbt-airflow)
+
+- [Traffic Data Analytics Data Warehouse](#traffic-data-analytics-data-warehouse)
   - [Overview](#overview)
-  - [What this repository includes](#what-this-repository-includes)
+  - [What's Included](#whats-included)
   - [Installation](#installation)
-  - [Getting started](#getting-started)
+  - [Getting Started](#getting-started)
+  - [Data Sources](#data-sources)
+  - [Data Generation](#data-generation)
   - [Screenshots](#screenshots)
   - [Contributions](#contributions)
   - [License](#license)
 
-
-## What this repository includes:
+## What's Included
 
 - Airflow DAGs
-- Apache Airflow, dbt, redash  and a DWH
-- ELT techniques to DWH
+- Apache Airflow, dbt, redash, and a Data Warehouse
+- ELT techniques for Data Warehouse
 - Data pipelines and orchestration workflows
 
 ## Installation
 
-
-1. **Clone this package**
+1. **Clone this Repository:**
 
     Clone this repository:
     ```bash 
@@ -38,14 +39,16 @@ Operating within the Extract Load Transform (ELT) framework, powered by the Data
     ```bash
     pip install -r requirements.txt
     ```
-2. **Python Environment:**
+
+2. **Set Up Python Environment:**
+
     ```bash
     python -m venv your_env_name
     ```
 
     Replace `your_env_name` with the desired name for your environment.
     
-    **Activate the environment:**
+    **Activate the Environment:**
 
     - On Windows:
 
@@ -59,25 +62,32 @@ Operating within the Extract Load Transform (ELT) framework, powered by the Data
     source your_env_name/bin/activate
     ```
 
-## Where to find the datas?
+## Getting Started
 
-- [Download site](https://open-traffic.epfl.ch/index.php/downloads/#1599047632450-ebe509c8-1330)
+Explore the repository to understand the project structure and components. Refer to the [Installation](#installation) section for setup instructions. Detailed documentation for each component is available within their respective folders.
+
+## Data Sources
+
+The project relies on data from the following sources:
+
+- [Download Site](https://open-traffic.epfl.ch/index.php/downloads/#1599047632450-ebe509c8-1330)
 - [Records](https://zenodo.org/records/7426506)
 
+## Data Generation
 
-## Understand how the data is generated
+Understand how the data is generated:
 
-- [PIA15_poster.pdf (datafromsky.com)](https://datafromsky.com/wp-content/uploads/2015/03/PIA15_poster.pdf)
-- [(PDF) Automatic vehicle trajectory extraction for traffic analysis from aerial video data (researchgate.net)](https://www.researchgate.net/publication/276857533_Automatic_vehicle_trajectory_extraction_for_traffic_analysis_from_aerial_video_data)
+- [PIA15 Poster (datafromsky.com)](https://datafromsky.com/wp-content/uploads/2015/03/PIA15_poster.pdf)
+- [(PDF) Automatic Vehicle Trajectory Extraction (researchgate.net)](https://www.researchgate.net/publication/276857533_Automatic_vehicle_trajectory_extraction_for_traffic_analysis_from_aerial_video_data)
 
 ## Screenshots
 
-- Navigate to screenshots folder to analyize all the 
+Navigate to the `screenshots` folder to view visual representations of the project.
 
-## Contributions:
+## Contributions
 
-We welcome contributions to this repository. Please feel free to submit pull requests with improvements to the code, documentation, or visualizations.
+We welcome contributions to this repository. Please submit pull requests with improvements to code, documentation, or visualizations. Refer to the [Contribution Guidelines](CONTRIBUTING.md) for details.
 
-## License:
+## License
 
-This repository is licensed under the MIT license.
+This repository is licensed under the [MIT License](LICENSE).
