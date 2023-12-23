@@ -4,6 +4,7 @@ set -eu
 
 REDASH_BASE_PATH=/opt/redash
 
+
 create_directories() {
   if [ ! -e "$REDASH_BASE_PATH" ]; then
     sudo mkdir -p "$REDASH_BASE_PATH"
