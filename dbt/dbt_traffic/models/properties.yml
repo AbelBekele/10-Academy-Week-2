@@ -1,0 +1,96 @@
+version: 2
+
+models:
+  - name: acceleration
+    materialized: table
+    description: |
+      This dbt model extracts acceleration data from the "automobiles" table.
+    columns:
+      - name: id
+        description: The unique identifier for each record.
+      - name: track_id
+        description: The track identifier associated with the acceleration data.
+      - name: lat_acc
+        description: Latitude acceleration.
+      - name: lon_acc
+        description: Longitude acceleration.
+      - name: time
+        description: The timestamp of the acceleration data.
+
+  - name: automobiles_info
+    materialized: table
+    description: |
+      This dbt model calculates a summary of automobile data from the "traffic" table.
+    columns:
+      - name: Automobile_type
+        description: The type of automobile.
+      - name: Automobile_count
+        description: The count of automobiles for each type.
+      - name: Avg_distance_traveled
+        description: The average distance traveled for each automobile type.
+      - name: Avg_speed_by_automobile
+        description: The average speed for each automobile type.
+
+  - name: average
+    materialized: view
+    description: |
+      This dbt model calculates a summary of timely data from the "automobiles" table.
+    columns:
+      - name: time
+        description: The timestamp of the data.
+      - name: speed
+        description: The average speed at each timestamp.
+      - name: lat_acc
+        description: The average latitude acceleration at each timestamp.
+      - name: lon_acc
+        description: The average longitude acceleration at each timestamp.
+
+  - name: distance_traveled
+    materialized: view
+    description: |
+      This dbt model calculates a summary of distance data from the "traffic" table.
+    columns:
+      - name: Automobile_type
+        description: The type of automobile.
+      - name: Total_distance
+        description: The total distance traveled for each automobile type.
+
+  - name: spatial
+    materialized: table
+    description: |
+      This dbt model calculates heatmap data from the "automobiles" and "traffic" tables.
+    columns:
+      - name: Automobile_type
+        description: The type of automobile.
+      - name: lat
+        description: Latitude of the data point.
+      - name: lon
+        description: Longitude of the data point.
+      - name: point_count
+        description: Count of data points.
+
+  - name: trajectory
+    materialized: table
+    description: |
+      This dbt model extracts trajectory data from the "automobiles" table.
+    columns:
+      - name: id
+        description: The unique identifier for each record.
+      - name: track_id
+        description: The track identifier associated with the trajectory data.
+      - name: lat
+        description: Latitude of the data point.
+      - name: lon
+        description: Longitude of the data point.
+      - name: time
+        description: The timestamp of the trajectory data.
+
+  - name: type_distribution
+    materialized: view
+    description: |
+      This dbt model calculates a distribution of automobile types from the "traffic" table.
+    columns:
+      - name: Automobile_type
+        description: The type of automobile.
+      - name: Vehicle_count
+        description: The count of vehicles for each type.
