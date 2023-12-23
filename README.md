@@ -13,12 +13,6 @@ Operating within the Extract Load Transform (ELT) framework, powered by the Data
   - [Installation](#installation)
   - [Getting started](#getting-started)
   - [Screenshots](#screenshots)
-    - [Airflow](#airflow)
-    - [Airflow DAG Graph](#airflow-dag-graph)
-    - [Airflow DAG Detail](#airflow-dag-detail)
-    - [Airflow Schedule](#airflow-schedule)
-    - [dbt model automobile](#dbt-model-automobile)
-    - [dbt model average](#dbt-model-average)
   - [Contributions](#contributions)
   - [License](#license)
 
@@ -78,23 +72,7 @@ Operating within the Extract Load Transform (ELT) framework, powered by the Data
 
 ## Screenshots
 
-- ## Airflow
-    ![App Screenshot](./screenshots/Airflow_runs.png)
-
-- ## Airflow DAG Graph
-    ![App Screenshot](./screenshots/Airflow_Graph.png)
-
-- ## Airflow DAG Detail
-    ![App Screenshot](./screenshots/Airflow_DAG_detail.png)
-
-- ## Airflow Schedule
-    ![App Screenshot](./screenshots/Airflow_schedule.png)
-
-- ## dbt model automobile
-    ![App Screenshot](./screenshots/dbt_model_automobile.png)
-
-- ## dbt model average
-    ![App Screenshot](./screenshots/dbt_model_average.png)
+- Navigate to screenshots folder to analyize all the 
 
 ## Contributions:
 

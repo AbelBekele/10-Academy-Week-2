@@ -30,33 +30,22 @@ def create_table():
 
 def populate__automobiles_table(ti):
     traffic_file_name = ti.xcom_pull(key="traffic",task_ids='extract_from_file')
-    # automobile_file_name = ti.xcom_pull(key="automobile",task_ids='extract_from_file')
-    # traffic_data,automobile_data=combined_df['traffic'], combined_df['automobile']
     sql_preprocessor.insert_to_table(traffic_file_name, 'traffic',from_file=True)
-    # sql_preprocessor.insert_to_table(automobile_file_name, 'automobiles',from_file=True)
 
 def populate_traffic_table(ti):
-    # traffic_file_name = ti.xcom_pull(key="traffic",task_ids='extract_from_file')
     automobile_file_name = ti.xcom_pull(key="automobile",task_ids='extract_from_file')
-    # traffic_data,automobile_data=combined_df['traffic'], combined_df['automobile']
-    # sql_preprocessor.insert_to_table(traffic_file_name, 'traffic',from_file=True)
     sql_preprocessor.insert_to_table(automobile_file_name, 'automobiles',from_file=True)
 
 def clear_memory_automobile(ti):
     traffic_file_name = ti.xcom_pull(key="traffic",task_ids='extract_from_file')
-    # automobile_file_name = ti.xcom_pull(key="automobile",task_ids='extract_from_file')
 
     os.remove(f'../temp/{traffic_file_name}')
-    # os.remove(f'../temp_storage/{automobile_file_name}')
 
 def clear_memory_traffic(ti):
-    # traffic_file_name = ti.xcom_pull(key="traffic",task_ids='extract_from_file')
     automobile_file_name = ti.xcom_pull(key="automobile",task_ids='extract_from_file')
 
-    # os.remove(f'../temp_storage/{traffic_file_name}')
     os.remove(f'../temp/{automobile_file_name}')
 
-# Specifing the default_args
 default_args = {
     'owner': 'Abel',
     'depends_on_past': False,
@@ -104,5 +93,5 @@ with DAG(
         python_callable = clear_memory_traffic
     )
 
-    [read_data,create_tables]>>populate_automobiles>>clear_temp_automobile_data,populate_automobiles>>populate_traffic>>clear_temp_traffic_data
+    [read_data,create_tables]>>populate_automobiles>>populate_traffic>>[clear_temp_traffic_data,clear_temp_automobile_data]
     
