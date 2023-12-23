@@ -70,6 +70,7 @@ x-airflow-common:
     - ../utils:/opt/utils
     - ../data:/opt/data
     - ../temp:/opt/temp
+    - ../dbt:/opt/dbt
 
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:

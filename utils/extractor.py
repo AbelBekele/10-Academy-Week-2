@@ -17,7 +17,7 @@ class DataExtractor():
                 lines=f.readlines()
 
             columns=lines[0].replace('\n','').split(';')
-            data=lines[1:20]
+            data=lines[1:100]
             return columns,data
         except Exception as e:
             # the try excepts here are for the airflow
@@ -41,18 +41,18 @@ class DataExtractor():
 
     def prepare_data_for_pandas(self,columns,all_data,id_prefix)->tuple:
         try:
-            trajectory_cols=columns[:4]
-            trajectory_rows=[]
+            traffic_cols=columns[:4]
+            traffic_rows=[]
 
-            timed_vehicle_cols=['track_id']+columns[4:]
-            timed_vehicle_rows=[]
+            timed_automobile_cols=['track_id']+columns[4:]
+            timed_automobile_rows=[]
 
             for row in all_data:
                 try:
                     items=row.replace('\n','').split(';')
                     items[0]=f"{id_prefix}_{items[0]}"
-                    trajectory_rows.append(items[:4])
-                    timed_vehicle_rows.extend(self.chunk_list(items[4:],6,items[0]))
+                    traffic_rows.append(items[:4])
+                    timed_automobile_rows.extend(self.chunk_list(items[4:],6,items[0]))
                 except Exception as e:
                     # the try excepts here are for the airflow
                     try:
@@ -60,7 +60,7 @@ class DataExtractor():
                     except:
                         pass
             
-            return (trajectory_cols,trajectory_rows),(timed_vehicle_cols,timed_vehicle_rows)
+            return (traffic_cols,traffic_rows),(timed_automobile_cols,timed_automobile_rows)
         except Exception as e:
             # the try excepts here are for the airflow
             try:
@@ -68,16 +68,16 @@ class DataExtractor():
             except:
                 pass
     
-    def prepare_data_frame(self,trajectory_data:tuple,timed_vehicle_data:tuple):
+    def prepare_data_frame(self,traffic_data:tuple,timed_automobile_data:tuple):
 
         try:
-            trajectory_cols,trajectory_rows=trajectory_data
-            timed_vehicle_cols,timed_vehicle_rows=timed_vehicle_data
+            traffic_cols,traffic_rows=traffic_data
+            timed_automobile_cols,timed_automobile_rows=timed_automobile_data
 
-            trajectory_data=pd.DataFrame(columns=trajectory_cols,data=trajectory_rows)
-            timed_vehicle_data=pd.DataFrame(columns=timed_vehicle_cols,data=timed_vehicle_rows)
+            traffic_data=pd.DataFrame(columns=traffic_cols,data=traffic_rows)
+            timed_automobile_data=pd.DataFrame(columns=timed_automobile_cols,data=timed_automobile_rows)
 
-            return trajectory_data,timed_vehicle_data
+            return traffic_data,timed_automobile_data
 
         except Exception as e:
             # the try excepts here are for the airflow
@@ -91,14 +91,14 @@ class DataExtractor():
             # set the day and time as unique identifier
             id_prefix= f"{file_name.split('.')[0]}"
             columns,all_data=self.get_columns_and_rows(file_path=file_name)
-            trajectory_data, timed_vehicle_data=self.prepare_data_for_pandas(columns=columns,all_data=all_data,id_prefix=id_prefix)
+            traffic_data, timed_automobile_data=self.prepare_data_for_pandas(columns=columns,all_data=all_data,id_prefix=id_prefix)
             if not return_json:
-                return self.prepare_data_frame(trajectory_data,timed_vehicle_data)
+                return self.prepare_data_frame(traffic_data,timed_automobile_data)
             
-            tr,vh= self.prepare_data_frame(trajectory_data,timed_vehicle_data)
+            tr,vh= self.prepare_data_frame(traffic_data,timed_automobile_data)
             
-            tr_file_name= str(datetime.today()).replace(' ','_')+"trajectory.json"
-            vh_file_name= str(datetime.today()).replace(' ','_')+"vehicle_data.json"
+            tr_file_name= str(datetime.today()).replace(' ','_')+"traffic.json"
+            vh_file_name= str(datetime.today()).replace(' ','_')+"automobile_data.json"
 
             tr.to_json(f'../temp/{tr_file_name}',orient='records')
             vh.to_json(f'../temp/{vh_file_name}',orient='records')

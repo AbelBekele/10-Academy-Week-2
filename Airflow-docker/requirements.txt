@@ -1,3 +1,4 @@
 pandas
 numpy
-dbt
+dbt-core
+dbt-postgres
