@@ -17,7 +17,7 @@ class DataExtractor():
                 lines=f.readlines()
 
             columns=lines[0].replace('\n','').split(';')
-            data=lines[0:40]
+            data=lines[1:100]
             return columns,data
         except Exception as e:
             # the try excepts here are for the airflow

@@ -1,0 +1,25 @@
+dbt_traffic:
+  outputs:
+    prod:
+      dbname: postgres
+      host: 192.168.137.112
+      pass: airflow
+      port: 2345
+      schema: dbtprod
+      threads: 10
+      type: postgres
+      user: airflow
+  target: prod
+
+dbt_traffic:
+  outputs:
+    dev:
+      dbname: postgres
+      host: 192.168.137.112
+      pass: airflow
+      port: 2345
+      schema: dbt
+      threads: 10
+      type: postgres
+      user: airflow
+  target: dev
